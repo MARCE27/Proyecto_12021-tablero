@@ -17,6 +17,7 @@ library(DT)
 library(ggplot2)
 library(plotly)
 library(leaflet)
+library(dygraphs)
 
 ```
 ```{r datos , warning=FALSE, message=FALSE}
@@ -38,73 +39,40 @@ fallecidos <-
 
 ```
 
-colum {data-width=650}
+colum {data-width=350}
 -----------------------------------------------------------------------
 
-### Mapa de casos de covid-19 en Costa Rica, para el viernes 22 de octubre del 2021
+### Texto
+
+```{r setup, include=FALSE}
+library(dygraphs)
+```
+
+Row {data-height=600}
+-------------------------------------
+
+### All Lung Deaths
 
 ```{r}
-fallecidos_rl <- raster::raster(fallecidos)
-bins <- c(10, 100, 500, 1000, 4000, 7600)
-pal <- colorBin("YlOrBr", domain = casos$activos, bins = bins)
-bins3 <- c(1, 5000, 10000, 20000, 40000, 52000)
-pal3 <- colorBin("Reds", domain = casos$positivos, bins = bins3)
-at <- seq(1:800)
-pal2 <- colorBin('Accent', domain = at , na.color = "transparent")
+dygraph(ldeaths)
+```
 
-leaflet() %>%
-  addTiles(group = "OSM") %>%
-  addProviderTiles(providers$Esri.NatGeoWorldMap , group = "NatGeo") %>%
-  addProviderTiles(providers$CartoDB.DarkMatter, group = "CartoDB-Black") %>%
-  addRasterImage(fallecidos_rl,
-                 opacity = 1,
-                 group = "Fallecidos",
-                 colors = pal2) %>%
-  addLegend("bottomleft",
-            pal = pal2,
-            values = at,
-            title = "Fallecidos") %>%
-  addPolygons(
-    data = casos,
-    color = "black",
-    fillColor = ~ pal(activos),
-    fillOpacity = 1,
-    weight = 1,
-    opacity = 1,
-    stroke = TRUE,
-    group = "Casos Activos", 
-    popup = paste0("<b>Cantón: </b>", casos$canton, "<br>", "<b>Casos activos: </b>", casos$activos) 
-  ) %>%
-  addLegend(
-    pal = pal,
-    values = casos$activos,
-    opacity = 1,
-    title = "Casos Activos"
-  ) %>%
-  addPolygons(
-    data = casos,
-    color = "black",
-    fillColor = ~ pal3(positivos),
-    fillOpacity = 1,
-    weight = 1,
-    opacity = 1,
-    stroke = TRUE,
-    group = "Casos Positivos", 
-    popup = paste0("<b>Cantón: </b>", casos$canton, "<br>", "<b>Casos positivos: </b>", casos$positivos )
-  ) %>%
-  addLegend(
-    pal = pal3,
-    values = casos$activos,
-    opacity = 1,
-    title = "Casos Positivos"
-  ) %>%
-  addLayersControl(
-    "bottomleft",
-    baseGroups = c("OSM", "NatGeo", "CartoDB-Black"),
-    overlayGroups = c("Fallecidos", "Casos Activos", "Casos Positivos" ),
-    options = layersControlOptions(collapsed = TRUE)
-  ) %>%
-  addScaleBar("bottomright")
+Row {data-height=400}
+-------------------------------------
+
+### Male Deaths
+
+```{r}
+dygraph(mdeaths)
+```
+
+### About dygraphs
+
+This example makes use of the dygraphs R package. The dygraphs
+package provides rich facilities for charting time-series data 
+in R. You can use dygraphs at the R console, within R Markdown
+documents, and within Shiny applications.
+
 ```
 
 Column {data-width=350}
