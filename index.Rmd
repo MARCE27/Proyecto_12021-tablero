@@ -44,28 +44,6 @@ colum {data-width=350}
 
 ### Texto
 
-```{r setup, include=FALSE}
-library(dygraphs)
-```
-
-Row {data-height=600}
--------------------------------------
-
-### All Lung Deaths
-
-```{r}
-dygraph(ldeaths)
-```
-
-Row {data-height=400}
--------------------------------------
-
-### Male Deaths
-
-```{r}
-dygraph(mdeaths)
-```
-
 ### About dygraphs
 
 This example makes use of the dygraphs R package. The dygraphs
@@ -73,8 +51,12 @@ package provides rich facilities for charting time-series data
 in R. You can use dygraphs at the R console, within R Markdown
 documents, and within Shiny applications.
 
-```
+La [COVID-19] (https://www.who.int/es/news-room/q-a-detail/coronavirus-disease-covid-19) es una enfermedad causada por un nuevo tipo de coronavirus conocido como SARS-CoV-2. Este virus fue reportado por vez primera el 31 de diciembre de 2019, en Wuhan (República Popular China), desde ese momento se han reportado 243,662,107 casos positivos de los cuales han fallecido 4.948.516 confirmados y entre 8 y 17 millones de personas estimadas.
+Según estadísticas de la *[Caja Costarricense del Seguro Social]* (https://www.ccss.sa.cr/web/coronavirus/), , en Costa Rica, se han reportado 553661 casos positivos de los cuales han fallecido 6880 personas, desde el primer caso reportado el 6 de marzo de 2020.
+En esta pagina web, se presentan datos, sobre la distribución del virus a nivel espacial en cuanto a los casos positivos, activos y fallecidos por cantón en Costa Rica.
 
+
+```
 Column {data-width=350}
 -----------------------------------------------------------------------
 
